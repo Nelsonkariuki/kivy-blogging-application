@@ -1,0 +1,265 @@
+WindowManager:
+        id: window_manager
+
+        HomeScreen:
+        ListScreen:
+        PostScreen:
+        RegistrationScreen:
+        LogScreen:
+
+
+<HomeScreen>:
+        name: "home"
+
+        email: email
+        password: password
+        title: title
+        content: content
+
+        MDBoxLayout:
+                orientation: 'vertical'
+
+                MDToolbar:
+                        title: "Blogging and Journaling"
+                        right_action_items: [['book-open', lambda x: app.root.change_screen('list')], ['file-edit', lambda x: app.root.change_screen('post')], ['account', lambda x: app.root.change_screen('registration')], ['file-cabinet', lambda x: app.root.change_screen('log')]]
+
+                MDBoxLayout:
+                        orientation: 'vertical'
+                        padding: dp(32)
+                        spacing: dp(32)
+
+                        MDStackLayout:
+                                orientation: 'lr-tb'
+                                spacing: dp(16)
+
+                                MDTextFieldRound:
+                                        id: email
+                                        icon_left: 'email'
+                                        hint_text: "Email Address"
+
+                                MDTextFieldRound:
+                                        id: password
+                                        icon_left: 'key-variant'
+                                        hint_text: "Password"
+                                        password: True
+
+                        MDTextField:
+                                id: title
+                                hint_text: "Title"
+
+                        MDTextFieldRect:
+                                id: content
+                                hint_text: "Content here.."
+
+                        MDTextButton:
+                                text: "Attach Media"
+                                on_release: app.file_manager_open()
+
+                        MDGridLayout:
+                                cols: 2
+                                col_default_width: 144
+                                col_force_default: True
+
+                                MDLabel:
+                                        text: "Private"
+
+                                MDCheckbox:
+                                        on_active: app.on_checkbox_active(*args)
+
+                        MDStackLayout:
+                                orientation: 'rl-tb'
+
+                                MDRaisedButton:
+                                        text: "Post!"
+                                        on_release: root.post_text()
+
+
+<ListScreen>:
+        name: "list"
+
+        MDBoxLayout:
+                orientation: 'vertical'
+
+                MDToolbar:
+                        title: "Blogging and Journaling"
+                        right_action_items: [['login-variant', lambda x: app.root.change_screen('home')], ['file-edit', lambda x: app.root.change_screen('post')], ['account', lambda x: app.root.change_screen('registration')], ['file-cabinet', lambda x: app.root.change_screen('log')]]
+
+                MDBoxLayout:
+                        orientation: 'vertical'
+                        padding: dp(16)
+
+                        ScrollView:
+
+                                MDGridLayout:
+                                        id: post_list
+                                        cols: 2
+                                        adaptive_height: True
+                                        padding: dp(32)
+                                        spacing: dp(64)
+
+
+<PostScreen>:
+        name: "post"
+
+        email: email
+        password: password
+        blog_number: blog_number
+
+        MDBoxLayout:
+                orientation: 'vertical'
+                spacing: dp(64)
+
+                MDToolbar:
+                        title: "Blogging and Journaling"
+                        right_action_items: [['login-variant', lambda x: app.root.change_screen('home')], ['book-open', lambda x: app.root.change_screen('list')], ['account', lambda x: app.root.change_screen('registration')], ['file-cabinet', lambda x: app.root.change_screen('log')]]
+
+                MDBoxLayout:
+                        orientation: 'vertical'
+                        padding: dp(16)
+                        adaptive_height: True
+
+                        MDBoxLayout:
+                                orientation: 'horizontal'
+                                padding: dp(16)
+                                spacing: dp(48)
+
+                                MDTextFieldRound:
+                                        id: email
+                                        icon_left: 'email'
+                                        hint_text: "Email Address"
+
+                                MDTextFieldRound:
+                                        id: password
+                                        icon_left: 'key-variant'
+                                        hint_text: "Password"
+                                        password: True
+
+                        MDBoxLayout:
+                                orientation: 'horizontal'
+                                padding: dp(16)
+                                spacing: dp(48)
+                                adaptive_height: True
+
+                                MDTextFieldRound:
+                                        id: blog_number
+                                        hint_text: "Enter Blog #"
+
+                                MDFillRoundFlatButton:
+                                        text: "VIEW"
+                                        width: 32
+                                        on_release: root.view_post()
+
+                                MDFillRoundFlatButton:
+                                        text: "DELETE"
+                                        width: 32
+                                        on_release: root.delete_post()
+
+                AnchorLayout:
+                        orientation: 'vertical'
+                        padding: dp(16)
+
+                        ScrollView:
+
+                                MDGridLayout:
+                                        id: post_data
+                                        cols: 2
+                                        adaptive_height: True
+                                        padding: dp(32)
+                                        spacing: dp(48)
+
+
+<RegistrationScreen>:
+        name: "registration"
+
+        email: email
+        password: password
+
+        MDBoxLayout:
+                orientation: 'vertical'
+
+                MDToolbar:
+                        title: "Blogging and Journaling"
+                        right_action_items: [['login-variant', lambda x: app.root.change_screen('home')], ['book-open', lambda x: app.root.change_screen('list')], ['file-edit', lambda x: app.root.change_screen('post')], ['file-cabinet', lambda x: app.root.change_screen('log')]]
+
+                MDGridLayout:
+                        rows: 3
+                        padding: dp(32)
+                        spacing: dp(32)
+
+                        MDTextFieldRound:
+                                id: email
+                                icon_left: 'email'
+                                hint_text: "Email Address"
+
+                        MDTextFieldRound:
+                                id: password
+                                icon_left: 'key-variant'
+                                hint_text: "Password"
+                                password: True
+
+                        AnchorLayout:
+                                anchor_x: 'center'
+                                anchor_y: 'top'
+
+                                MDFillRoundFlatButton:
+                                        text: "Register"
+                                        on_release: root.register()
+
+
+<LogScreen>:
+        name: "log"
+
+        email: email
+        password: password
+
+        MDBoxLayout:
+                orientation: 'vertical'
+
+                MDToolbar:
+                        title: "Blogging and Journaling"
+                        right_action_items: [['login-variant', lambda x: app.root.change_screen('home')], ['book-open', lambda x: app.root.change_screen('list')], ['file-edit', lambda x: app.root.change_screen('post')], ['account', lambda x: app.root.change_screen('registration')]]
+
+                MDBoxLayout:
+                        orientation: 'vertical'
+                        padding: dp(64)
+                        adaptive_height: True
+
+                        MDBoxLayout:
+                                orientation: 'horizontal'
+                                padding: dp(16)
+                                spacing: dp(48)
+
+                                MDTextFieldRound:
+                                        id: email
+                                        icon_left: 'email'
+                                        hint_text: "Email Address"
+
+                                MDTextFieldRound:
+                                        id: password
+                                        icon_left: 'key-variant'
+                                        hint_text: "Password"
+                                        password: True
+
+                                MDFillRoundFlatButton:
+                                        text: "Show Log"
+                                        pos_hint: {'center_x': 0.5}
+                                        width: 32
+                                        on_release: root.show_log()
+
+                MDBoxLayout:
+                        orientation: 'vertical'
+                        padding: dp(16)
+
+                        ScrollView:
+
+                                MDGridLayout:
+                                        id: log_list
+                                        cols: 6
+                                        row_default_height: root.height * 0.125
+                                        adaptive_height: True
+                                        padding: dp(32)
+                                        spacing: dp(48)
+
+
+<ViewLabel>:
+        font_style: "H6"
