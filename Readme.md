@@ -46,6 +46,6 @@ its a python3-based cross-platform blogging application built using Kivy framewo
    ```
    ---
    
-   :file_cabinet: An SQLite database (blog.db) will be created in the root directory during the first run.
+  An SQLite database (blog.db) will be created in the root directory during the first run. which records all of the user and admin activities and creates a log .
 
    :key: **Default credentials** { Email Address: `kivy@fot.com` Password: `Kivy@2021` }
